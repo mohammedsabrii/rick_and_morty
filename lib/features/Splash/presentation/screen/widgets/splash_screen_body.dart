@@ -20,15 +20,15 @@ class SplashScreenBody extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              shadows: [
+              shadows: const [
                 BoxShadow(
-                  color: AppColors.kShadow,
+                  color: AppColors.kSplashShadow,
                   blurRadius: 10,
                   offset: Offset(0, 8),
                   spreadRadius: -6,
                 ),
                 BoxShadow(
-                  color: AppColors.kShadow,
+                  color: AppColors.kSplashShadow,
                   blurRadius: 25,
                   offset: Offset(0, 20),
                   spreadRadius: -5,
@@ -48,7 +48,7 @@ class SplashScreenBody extends StatelessWidget {
             color: AppColors.kMainColor,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           'Multiverse Discovery Engine © 2024',
           textAlign: TextAlign.center,

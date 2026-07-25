@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rick_and_morty/core/routes/app_routes.dart';
+import 'package:rick_and_morty/core/utils/app_colors.dart';
 import 'package:rick_and_morty/features/Splash/presentation/screen/widgets/splash_screen_body.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,6 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white, body: SplashScreenBody());
+    return const Scaffold(
+      backgroundColor: AppColors.kBackGroundColor,
+      body: SplashScreenBody(),
+    );
   }
 }

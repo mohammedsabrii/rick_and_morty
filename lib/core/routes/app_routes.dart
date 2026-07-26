@@ -19,10 +19,10 @@ class AppRoutes {
         path: kHomeScreen,
         builder: (context, state) => const HomeScreen(),
       ),
-      GoRoute(
-        path: kCharacterDetailsScreen,
-        builder: (context, state) => const CharacterDetailsScreen(),
-      ),
+      // GoRoute(
+      //   path: kCharacterDetailsScreen,
+      //   builder: (context, state) => const CharacterDetailsScreen(),
+      // ),
     ],
   );
 }

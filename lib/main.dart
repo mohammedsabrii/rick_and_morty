@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rick_and_morty/core/routes/app_routes.dart';
+import 'package:rick_and_morty/core/services/service_locator.dart';
 import 'package:rick_and_morty/core/widgets/my_custom_scroll_behavior.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initServiceLocator();
   runApp(const RickAndMortyApp());
 }
 

@@ -2,20 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rick_and_morty/core/utils/app_colors.dart';
 import 'package:rick_and_morty/core/utils/app_text_styles.dart';
+import 'package:rick_and_morty/features/home/domain/entity/character_entity.dart';
 
 class HomeCharacterCardContent extends StatelessWidget {
-  const HomeCharacterCardContent({super.key});
+  const HomeCharacterCardContent({super.key, required this.character});
+  final CharacterEntity character;
+  Color get _statusColor {
+    switch (character.characterState.toLowerCase()) {
+      case 'alive':
+        return AppColors.kLightGreen;
+      case 'dead':
+        return AppColors.kDarkCrimsonRed;
+      default:
+        return AppColors.kMainColor;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: .start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           width: 197.w,
           child: Text(
-            'Rick Sanchez',
+            character.characterName,
             style: AppTextStyles.stylePlusJakartaSansRegular15(),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         Row(
@@ -24,7 +37,7 @@ class HomeCharacterCardContent extends StatelessWidget {
               width: 8.w,
               height: 8.h,
               decoration: ShapeDecoration(
-                color: AppColors.kLightGreen,
+                color: _statusColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(9999),
                 ),
@@ -32,7 +45,7 @@ class HomeCharacterCardContent extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Text(
-              'Alive - Human',
+              '${character.characterState} - ${character.characterStatic}',
               style: AppTextStyles.stylePlusJakartaSansMedium12().copyWith(
                 color: AppColors.kDarkGrayPurple,
               ),
@@ -52,10 +65,11 @@ class HomeCharacterCardContent extends StatelessWidget {
         SizedBox(
           width: 197.w,
           child: Text(
-            'Citadel of Ricks',
+            character.characterLocation,
             style: AppTextStyles.stylePlusJakartaSansRegular14().copyWith(
               color: AppColors.kDarkGrayPurple,
             ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

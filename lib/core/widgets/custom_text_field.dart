@@ -13,6 +13,8 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.hintStyle,
     this.controller,
+    this.readOnly,
+    this.onTap,
   });
 
   final bool? canRequestFocus;
@@ -22,6 +24,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextStyle? hintStyle;
   final TextEditingController? controller;
+  final bool? readOnly;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +40,8 @@ class CustomTextField extends StatelessWidget {
             color: AppColors.kLavenderBlue,
           ),
           child: TextFormField(
+            readOnly: readOnly ?? false,
+            onTap: onTap,
             onTapOutside: (event) {
               FocusManager.instance.primaryFocus?.unfocus();
             },
@@ -51,7 +57,7 @@ class CustomTextField extends StatelessWidget {
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search, color: Colors.grey, size: 26.sp),
-              suffixIcon: Icon(Icons.list, color: Colors.grey, size: 26.sp),
+              suffixIcon: suffixIcon ?? Icon(Icons.list, color: Colors.grey, size: 26.sp),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.r),
               ),
@@ -74,7 +80,7 @@ class CustomTextField extends StatelessWidget {
   OutlineInputBorder outLineInputBorderMethod() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.r),
-      borderSide: BorderSide(color: Colors.transparent),
+      borderSide: const BorderSide(color: Colors.transparent),
     );
   }
 }

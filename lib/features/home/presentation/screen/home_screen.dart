@@ -14,8 +14,7 @@ class HomeScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-              getIt<GetCharactersCubit>()..getCharacters(),
+          create: (context) => getIt<GetCharactersCubit>()..getCharacters(),
         ),
         BlocProvider(
           create: (context) => getIt<FilterCharacterCubit>(),

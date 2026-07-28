@@ -3,7 +3,13 @@ import 'package:rick_and_morty/features/home/data/model/rick_and_morty/result.da
 
 abstract class HomeRemoteDataSource {
   Future<List<Result>> getCharacters();
-  Future<List<Result>> getFilterCharacters({String? status, String? gender});
+  Future<List<Result>> getFilterCharacters({
+    String? name,
+    String? status,
+    String? gender,
+    String? species,
+  });
+  void resetFilter();
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -13,34 +19,41 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<List<Result>> getCharacters() async {
-    final response = await apiService.get(
-      endPoint: 'character',
-    );
+    final response = await apiService.get(endPoint: 'character');
     final data = response['results'] as List;
     return data.map((e) => Result.fromJson(e)).toList();
   }
 
   @override
   Future<List<Result>> getFilterCharacters({
+    String? name,
     String? status,
     String? gender,
+    String? species,
   }) async {
     String endPoint = 'character';
     final List<String> queryParams = [];
+    if (name != null && name.isNotEmpty) {
+      queryParams.add('name=$name');
+    }
     if (status != null && status.isNotEmpty) {
       queryParams.add('status=$status');
     }
     if (gender != null && gender.isNotEmpty) {
       queryParams.add('gender=$gender');
     }
+    if (species != null && species.isNotEmpty) {
+      queryParams.add('species=$species');
+    }
     if (queryParams.isNotEmpty) {
       endPoint += '?${queryParams.join('&')}';
     }
 
-    final response = await apiService.get(
-      endPoint: endPoint,
-    );
+    final response = await apiService.get(endPoint: endPoint);
     final data = response['results'] as List;
     return data.map((e) => Result.fromJson(e)).toList();
   }
+
+  @override
+  void resetFilter() {}
 }

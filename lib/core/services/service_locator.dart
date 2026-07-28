@@ -6,6 +6,7 @@ import 'package:rick_and_morty/features/home/data/repository%20implementation/ho
 import 'package:rick_and_morty/features/home/domain/repository/home_repository.dart';
 import 'package:rick_and_morty/features/home/domain/use%20cases/filter_character_use_case.dart';
 import 'package:rick_and_morty/features/home/domain/use%20cases/get_character_use_case.dart';
+import 'package:rick_and_morty/features/home/domain/use%20cases/reset_filter_use_case.dart';
 import 'package:rick_and_morty/features/home/presentation/screen/cubit/filter_character_cubit/filter_character_cubit.dart';
 import 'package:rick_and_morty/features/home/presentation/screen/cubit/get_character_cubit/get_character_cubit.dart';
 
@@ -46,12 +47,16 @@ void _initCharacters() {
   getIt.registerLazySingleton(
     () => FilterCharacterUseCase(homeRepository: getIt<HomeRepository>()),
   );
+  getIt.registerLazySingleton(
+    () => ResetFilterUseCase(homeRepository: getIt<HomeRepository>()),
+  );
 
   //cubit//
-  getIt.registerFactory(
-    () => GetCharactersCubit(getIt<GetCharacterUseCase>()),
-  );
-  getIt.registerFactory(
-    () => FilterCharacterCubit(getIt<FilterCharacterUseCase>()),
+  getIt.registerFactory(() => GetCharactersCubit(getIt<GetCharacterUseCase>()));
+  getIt.registerLazySingleton(
+    () => FilterCharacterCubit(
+      getIt<FilterCharacterUseCase>(),
+      getIt<ResetFilterUseCase>(),
+    ),
   );
 }

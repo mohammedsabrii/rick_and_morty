@@ -9,12 +9,16 @@ class FilterCharacterUseCase {
   FilterCharacterUseCase({required this.homeRepository});
 
   Future<Either<Failure, List<CharacterEntity>>> filterCharacters({
+    String? name,
     String? status,
     String? gender,
+    String? species,
   }) async {
     return await homeRepository.getFilterCharacters(
+      name: name,
       status: status,
       gender: gender,
+      species: species,
     );
   }
 }

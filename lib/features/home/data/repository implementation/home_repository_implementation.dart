@@ -9,6 +9,7 @@ class HomeRepositoryImplementation implements HomeRepository {
   final HomeRemoteDataSource homeRemoteDataSource;
 
   HomeRepositoryImplementation({required this.homeRemoteDataSource});
+
   @override
   Future<Either<Failure, List<CharacterEntity>>> getCharacters() async {
     try {
@@ -22,13 +23,17 @@ class HomeRepositoryImplementation implements HomeRepository {
 
   @override
   Future<Either<Failure, List<CharacterEntity>>> getFilterCharacters({
+    String? name,
     String? status,
     String? gender,
+    String? species,
   }) async {
     try {
       final data = await homeRemoteDataSource.getFilterCharacters(
+        name: name,
         status: status,
         gender: gender,
+        species: species,
       );
       return Right(data);
     } catch (e) {
@@ -40,5 +45,10 @@ class HomeRepositoryImplementation implements HomeRepository {
       }
       return Left(ServerFailure(e.toString()));
     }
+  }
+
+  @override
+  void resetFilter() {
+    homeRemoteDataSource.resetFilter();
   }
 }

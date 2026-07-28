@@ -11,6 +11,14 @@ abstract final class AppTextStyles {
     );
   }
 
+  static TextStyle stylePlusJakartaSansSemiBold22() {
+    return TextStyle(
+      fontFamily: _plusJakartaSans,
+      fontSize: 22.sp,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
   static TextStyle stylePlusJakartaSansSemiBold14() {
     return TextStyle(
       fontFamily: _plusJakartaSans,
@@ -111,6 +119,14 @@ abstract final class AppTextStyles {
     return TextStyle(
       fontFamily: _plusJakartaSans,
       fontSize: 12.sp,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  static TextStyle stylePlusJakartaSansMedium16() {
+    return TextStyle(
+      fontFamily: _plusJakartaSans,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w500,
     );
   }

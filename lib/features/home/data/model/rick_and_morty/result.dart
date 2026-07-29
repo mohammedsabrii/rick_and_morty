@@ -4,10 +4,8 @@ import 'location.dart';
 import 'origin.dart';
 
 class Result extends CharacterEntity {
-  int? id;
   String? name;
   String? status;
-  String? species;
   String? type;
   String? gender;
   Origin? origin;
@@ -18,10 +16,10 @@ class Result extends CharacterEntity {
   DateTime? created;
 
   Result({
-    this.id,
+    super.id,
     this.name,
     this.status,
-    this.species,
+    super.species,
     this.type,
     this.gender,
     this.origin,
@@ -39,6 +37,7 @@ class Result extends CharacterEntity {
          characterGender: gender ?? 'unknown',
          characterOrigin: origin?.name ?? 'unknown',
          characterLocation: location?.name ?? 'unknown',
+         episodesCount: episode?.length ?? 0,
        );
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(

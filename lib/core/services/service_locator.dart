@@ -1,6 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rick_and_morty/core/services/api_service.dart';
+import 'package:rick_and_morty/features/export/data/data_source/excel_export_service.dart';
+import 'package:rick_and_morty/features/export/data/repository_impl/export_repository_impl.dart';
+import 'package:rick_and_morty/features/export/domain/repository/export_repository.dart';
+import 'package:rick_and_morty/features/export/domain/use_cases/export_characters_to_excel_use_case.dart';
+import 'package:rick_and_morty/features/export/presentation/cubit/export_excel_cubit.dart';
 import 'package:rick_and_morty/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:rick_and_morty/features/home/data/repository%20implementation/home_repository_implementation.dart';
 import 'package:rick_and_morty/features/home/domain/repository/home_repository.dart';
@@ -14,6 +19,7 @@ final getIt = GetIt.instance;
 Future<void> initServiceLocator() async {
   _initCore();
   _initCharacters();
+  _initExport();
 }
 
 void _initCore() {
@@ -58,5 +64,20 @@ void _initCharacters() {
       getIt<FilterCharacterUseCase>(),
       getIt<ResetFilterUseCase>(),
     ),
+  );
+}
+
+void _initExport() {
+  getIt.registerLazySingleton<ExcelExportService>(() => ExcelExportService());
+  getIt.registerLazySingleton<ExportRepository>(
+    () => ExportRepositoryImpl(excelExportService: getIt<ExcelExportService>()),
+  );
+  getIt.registerLazySingleton(
+    () => ExportCharactersToExcelUseCase(
+      exportRepository: getIt<ExportRepository>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => ExportExcelCubit(getIt<ExportCharactersToExcelUseCase>()),
   );
 }

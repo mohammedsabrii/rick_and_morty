@@ -25,8 +25,6 @@ class SearchResultCardBody extends StatelessWidget {
         ),
         SizedBox(width: 12.w),
         SearchResultCardContent(character: character),
-        const Spacer(),
-        Icon(Icons.more_vert, size: 24.sp, color: Colors.grey),
       ],
     );
   }

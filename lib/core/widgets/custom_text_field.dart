@@ -57,7 +57,7 @@ class CustomTextField extends StatelessWidget {
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search, color: Colors.grey, size: 26.sp),
-              suffixIcon: suffixIcon ?? Icon(Icons.list, color: Colors.grey, size: 26.sp),
+              suffixIcon: suffixIcon,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.r),
               ),

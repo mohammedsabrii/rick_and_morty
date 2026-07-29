@@ -50,3 +50,8 @@ class ServerFailure extends Failure {
     }
   }
 }
+
+class ExcelExportFailure extends Failure {
+  ExcelExportFailure(super.message);
+}
+

@@ -24,8 +24,6 @@ class HomeCharacterCardBody extends StatelessWidget {
         ),
         SizedBox(width: 12.w),
         HomeCharacterCardContent(character: character),
-        const Spacer(),
-        Icon(Icons.more_vert, size: 24.sp),
       ],
     );
   }

@@ -21,6 +21,7 @@ class HomeScreenBody extends StatelessWidget {
             hintText: "Search Characters ....",
             readOnly: true,
             onTap: () => FilterBottomSheet.show(context),
+            suffixIcon: Icon(Icons.list, color: Colors.grey, size: 26.sp),
           ),
           SizedBox(height: 20.h),
           const CategoryList(),
